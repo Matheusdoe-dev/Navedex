@@ -3,14 +3,14 @@ import React from "react";
 import Header from "../../components/Header";
 import EditNaverForm from "../../components/Edit-Naver-Form";
 
-const AddNaver = () => {
+const EditNaver = () => {
   return (
     <>
       <Header />
 
-      <EditNaverForm title="Adicionar Naver" />
+      <EditNaverForm title="Editar Naver" />
     </>
   );
 };
 
-export default AddNaver;
+export default EditNaver;

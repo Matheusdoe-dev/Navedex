@@ -6,10 +6,10 @@ export const AddNaverContainer = styled(Container)`
     display: flex;
     flex-direction: column;
     width: 60%;
+    margin-top: var(--gap-md);
 
     button {
-      display: flex;
-      justify-content: flex-end;
+      align-self: flex-end;
     }
   }
 `;
