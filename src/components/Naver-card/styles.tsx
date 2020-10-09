@@ -5,7 +5,8 @@ export const Buttons = styled.div`
     display: flex;
     justify-content: flex-start;
 
-    button {
+    button,
+    a {
       background: 0;
       border: 0;
 
@@ -26,5 +27,11 @@ export const NaverContainer = styled.div`
     h3 {
       margin-bottom: var(--gap);
     }
+  }
+`;
+
+export const NaverInfo = styled.div`
+  & {
+    cursor: pointer;
   }
 `;
