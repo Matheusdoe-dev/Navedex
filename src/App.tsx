@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// components
+import Routes from "./routes";
+// styles
+import Colors from "./styles/settings/colors";
+import Gaps from "./styles/settings/gaps";
+import Animations from "./styles/settings/animations";
+import Reset from "./styles/generic/reset";
+import Elements from "./styles/base/elements";
+// contexts
+import {
+  ModalContextProvider,
+  useModal,
+  ModalContextInterface,
+} from "./hooks/modal";
 
-function App() {
+const App = () => {
+  const { handleActive, handleInactive } = useModal();
+
+  const useModalContext: ModalContextInterface = {
+    handleActive,
+    handleInactive,
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Colors />
+      <Gaps />
+      <Animations />
+      <Reset />
+      <Elements />
+
+      <ModalContextProvider value={useModalContext}>
+        <Routes />
+      </ModalContextProvider>
+    </>
   );
-}
+};
 
 export default App;
