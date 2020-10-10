@@ -16,7 +16,9 @@ const Login = () => {
           <img src={logoImg} alt="Nave.rs" />
           <Input label="E-mail" name="email" type="email" required />
           <Input label="Senha" name="password" type="password" required />
-          <Button type="submit">Entrar</Button>
+          <Button as="button" type="submit">
+            Entrar
+          </Button>
         </LoginForm>
       </LoginContainer>
     </main>
