@@ -1,6 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 
-const useModal = () => {
+export interface ModalContextInterface {
+  handleActive: (modal: string) => void;
+  handleInactive: () => void;
+}
+
+export const ModalContext = createContext<ModalContextInterface | null>(null);
+
+export const ModalContextProvider = ModalContext.Provider;
+
+export const ModalContextConsumer = ModalContext.Consumer;
+
+export const useModal = () => {
   const [status, setStatus] = useState("inactive");
   const [currentModal, setCurrentModal] = useState("");
 
@@ -41,5 +52,3 @@ const useModal = () => {
 
   return { handleActive, handleInactive };
 };
-
-export default useModal;

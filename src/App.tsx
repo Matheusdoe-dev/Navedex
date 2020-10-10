@@ -7,8 +7,21 @@ import Gaps from "./styles/settings/gaps";
 import Animations from "./styles/settings/animations";
 import Reset from "./styles/generic/reset";
 import Elements from "./styles/base/elements";
+// contexts
+import {
+  ModalContextProvider,
+  useModal,
+  ModalContextInterface,
+} from "./hooks/modal";
 
 const App = () => {
+  const { handleActive, handleInactive } = useModal();
+
+  const useModalContext: ModalContextInterface = {
+    handleActive,
+    handleInactive,
+  };
+
   return (
     <>
       <Colors />
@@ -17,7 +30,9 @@ const App = () => {
       <Reset />
       <Elements />
 
-      <Routes />
+      <ModalContextProvider value={useModalContext}>
+        <Routes />
+      </ModalContextProvider>
     </>
   );
 };

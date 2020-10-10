@@ -1,4 +1,6 @@
 import styled from "styled-components";
+// components
+import { Button } from "../../styles/objects/button";
 
 export const ModalBlock = styled.article`
   & {
@@ -21,6 +23,28 @@ export const ModalBlock = styled.article`
       h2 {
         margin-bottom: calc(var(--gap) * 3);
       }
+    }
+  }
+`;
+
+export const CloseButton = styled(Button)`
+  & {
+    display: flex;
+    place-content: center;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 94%;
+    top: 5%;
+    z-index: 901;
+    background: none;
+    color: none;
+
+    img {
+      position: relative;
+      top: -12px;
+      width: 24px;
+      height: 24px;
     }
   }
 `;
