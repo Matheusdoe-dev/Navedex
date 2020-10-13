@@ -32,7 +32,8 @@ const Elements = createGlobalStyle`
     }
 
     p,
-    input::placeholder {
+    input::placeholder
+    input {
         font-size: 1rem;
         font-weight: 400;
     }
@@ -51,7 +52,6 @@ const Elements = createGlobalStyle`
 
     a,
     button,
-    input,
     label {
         font-weight: 600;
     }
