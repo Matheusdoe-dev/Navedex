@@ -2,6 +2,15 @@ import styled from "styled-components";
 // components
 import { Container } from "../../styles/objects/grid";
 
+export const LoginBody = styled.main`
+  & {
+    &.modal {
+      background: var(--gray-900);
+      filter: brightness(50%);
+    }
+  }
+`;
+
 export const LoginContainer = styled(Container)`
   & {
     display: grid;

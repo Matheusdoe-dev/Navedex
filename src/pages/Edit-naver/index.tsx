@@ -7,8 +7,12 @@ import Modal from "../../components/Modal";
 import { EditNaverBody } from "./styles";
 // hooks
 import { ModalContextConsumer } from "../../hooks/modal";
+// utils
+import useCheckLogin from "../../hooks/check-login";
 
 const EditNaver = () => {
+  useCheckLogin();
+
   return (
     <ModalContextConsumer>
       {(modalContext) =>

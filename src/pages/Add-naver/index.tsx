@@ -7,8 +7,12 @@ import { AddNaverBody } from "./styles";
 // hooks
 import { ModalContextConsumer } from "../../hooks/modal";
 import Modal from "../../components/Modal";
+// utils
+import useCheckLogin from "../../hooks/check-login";
 
 const AddNaver = () => {
+  useCheckLogin();
+
   return (
     <ModalContextConsumer>
       {(modalContext) =>
