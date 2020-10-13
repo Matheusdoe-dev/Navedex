@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 // components
 import Header from "../../components/Header";
 import Naver from "../../components/Naver-card";
@@ -10,18 +10,20 @@ import {
   Navers,
   HomeBody,
   ModalButtonsBlock,
-  CloseButton,
 } from "./styles";
 import { Button } from "../../styles/objects/button";
 // imgs
 import naverImg from "../../assets/naver_4.jpg";
 import Modal from "../../components/Modal";
 import naverDetailImg from "../../assets/naver_detail.jpg";
-import closeIcon from "../../assets/close-icon.svg";
 // hooks
 import { ModalContextConsumer } from "../../hooks/modal";
+// utils
+import useCheckLogin from "../../hooks/check-login";
 
 const Home = () => {
+  useCheckLogin();
+
   return (
     <ModalContextConsumer>
       {(modalContext) =>
