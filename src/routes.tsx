@@ -12,9 +12,10 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Login} />
-        <Route path="/index" component={Home} />
+        <Route path="/navers/:naver_id" component={Home} />
+        <Route path="/navers" component={Home} />
         <Route path="/add-naver" component={AddNaver} />
-        <Route path="/edit-naver/:id" component={EditNaver} />
+        <Route path="/edit-naver/:naver_id" component={EditNaver} />
       </Switch>
     </BrowserRouter>
   );
