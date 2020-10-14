@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header>
       <HeaderContainer>
-        <Link to="/index">
+        <Link to="/navers">
           <img src={logoImg} alt="Nave.rs" />
         </Link>
         <button onClick={handleLogout}>Sair</button>
