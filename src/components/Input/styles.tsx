@@ -21,6 +21,10 @@ export const InputBlock = styled.div`
       padding: var(--gap);
       border-radius: 0;
       border: 1px solid var(--gray-800);
+
+      @media (max-width: 960px) {
+        padding: var(--gap-md);
+      }
     }
 
     input.error {

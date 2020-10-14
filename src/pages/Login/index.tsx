@@ -28,7 +28,6 @@ const Login = () => {
           <>
             <LoginBody data-anime="modal" onClick={modalContext.handleInactive}>
               <LoginContainer>
-                <div></div>
                 <LoginForm onSubmit={handleLogin}>
                   <img src={logoImg} alt="Nave.rs" />
                   <Input

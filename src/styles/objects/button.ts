@@ -26,5 +26,9 @@ export const Button = styled(Link)<ButtonProps>`
       transition: 0.2s;
       background: var(--gray-800);
     }
+
+    @media (max-width: 960px) {
+      padding: var(--gap-md) var(--gap-sm);
+    }
   }
 `;

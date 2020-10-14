@@ -23,6 +23,11 @@ export const ModalBlock = styled.article`
       h2 {
         margin-bottom: calc(var(--gap) * 3);
       }
+
+      @media (max-width: 960px) {
+        width: 80%;
+        left: 10%;
+      }
     }
   }
 `;
@@ -45,6 +50,10 @@ export const CloseButton = styled(Button)`
       top: -12px;
       width: 24px;
       height: 24px;
+    }
+
+    @media (max-width: 960px) {
+      left: 91%;
     }
   }
 `;

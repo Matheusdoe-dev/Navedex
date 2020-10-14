@@ -18,11 +18,16 @@ export const LoginContainer = styled(Container)`
     place-content: center;
     flex-direction: column;
     height: 100vh;
+
+    @media (max-width: 960px) {
+      grid-template-columns: 1fr;
+    }
   }
 `;
 
 export const LoginForm = styled.form`
   & {
+    grid-column-start: 2;
     width: 100%;
     padding: calc(var(--gap) * 5) var(--gap-md);
     border: 1px solid var(--gray-900);
@@ -33,6 +38,11 @@ export const LoginForm = styled.form`
 
     input {
       margin-bottom: var(--gap-md);
+    }
+
+    @media (max-width: 960px) {
+      grid-column-start: 1;
+      padding: calc(var(--gap) * 5) var(--gap-lg);
     }
   }
 `;
