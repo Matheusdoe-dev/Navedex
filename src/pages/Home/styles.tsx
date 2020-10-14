@@ -5,7 +5,8 @@ import { Button } from "../../styles/objects/button";
 
 export const HomeBody = styled.div`
   & {
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 
     &.modal {
       background: var(--gray-900);
@@ -68,6 +69,17 @@ export const CloseButton = styled(Button)`
       top: -12px;
       width: 24px;
       height: 24px;
+    }
+  }
+`;
+
+export const NoNavers = styled.div`
+  & {
+    display: flex;
+    place-content: center;
+
+    h2 {
+      margin-top: var(--gap-xl);
     }
   }
 `;

@@ -33,5 +33,9 @@ export const NaverContainer = styled.div`
 export const NaverInfo = styled.div`
   & {
     cursor: pointer;
+
+    img {
+      height: 280px;
+    }
   }
 `;

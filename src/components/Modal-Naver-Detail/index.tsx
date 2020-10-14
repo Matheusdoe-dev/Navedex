@@ -1,21 +1,27 @@
 import React, { HTMLAttributes } from "react";
 // components
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // imgs
 import deleteIcon from "../../assets/delete-icon.svg";
 import editIcon from "../../assets/edit-icon.svg";
 import closeIcon from "../../assets/close-icon.svg";
 // styles
-import { NaverDetailBlock, InfoBlock, Buttons, CloseButton } from "./styles";
+import {
+  NaverDetailBlock,
+  InfoBlock,
+  Buttons,
+  CloseButton,
+  NaverImage,
+} from "./styles";
 // hooks
 import { ModalContextConsumer } from "../../hooks/modal";
 
 interface NaverDetailProps extends HTMLAttributes<HTMLDivElement> {
-  naverName: string;
+  name: string;
   age: string;
   companyTime: string;
-  projects: number;
-  image: any;
+  projects: string;
+  image: string;
   role: string;
 }
 
@@ -23,20 +29,22 @@ const ModalNaverDetail: React.FC<NaverDetailProps> = ({
   image,
   age,
   companyTime,
-  naverName,
+  name,
   projects,
   role,
   children,
   ...props
 }) => {
+  const { naver_id } = useParams();
+
   return (
     <ModalContextConsumer>
       {(modalContext) =>
         modalContext && (
           <NaverDetailBlock data-modal="naver-detail" {...props}>
-            <img src={image} alt={naverName} />
+            <NaverImage src={image} alt={name} />
             <InfoBlock>
-              <h2>{naverName}</h2>
+              <h2>{name}</h2>
               <p>{role}</p>
 
               <h3>Idade</h3>
@@ -55,7 +63,7 @@ const ModalNaverDetail: React.FC<NaverDetailProps> = ({
                 >
                   <img src={deleteIcon} alt="Deletar" />
                 </button>
-                <Link to="/edit-naver/0" aria-label="Editar">
+                <Link to={`/edit-naver/${naver_id}`} aria-label="Editar">
                   <img src={editIcon} alt="Editar" />
                 </Link>
               </Buttons>

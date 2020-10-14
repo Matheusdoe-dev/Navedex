@@ -12,12 +12,12 @@ export const ModalContextProvider = ModalContext.Provider;
 export const ModalContextConsumer = ModalContext.Consumer;
 
 export const useModal = () => {
-  const [status, setStatus] = useState("inactive");
+  const [status, setStatus] = useState(false);
   const [currentModal, setCurrentModal] = useState("");
 
   const handleInactive = () => {
-    if (status === "active") {
-      setStatus("inactive");
+    if (status === true) {
+      setStatus(false);
     }
   };
 
@@ -25,7 +25,7 @@ export const useModal = () => {
     handleInactive();
 
     setCurrentModal(modal);
-    setStatus("active");
+    setStatus(true);
   };
 
   useEffect(() => {
@@ -39,7 +39,12 @@ export const useModal = () => {
       });
     };
 
-    if (status === "active") {
+    if (currentModal === "naver-created") {
+      console.log(currentModal);
+      console.log(modal);
+    }
+
+    if (status === true) {
       clearModals();
       modal?.classList.add("active");
       body?.classList.add("modal");
