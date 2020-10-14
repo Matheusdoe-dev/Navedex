@@ -32,9 +32,7 @@ export const useLogin = () => {
 
     if (response) {
       localStorage.setItem("token", `Bearer ${response.token}`);
-      history.push("/index");
-    } else {
-      // console.log(message);
+      history.push("/navers");
     }
   };
 
