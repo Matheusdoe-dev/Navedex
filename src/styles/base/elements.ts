@@ -55,6 +55,12 @@ const Elements = createGlobalStyle`
     label {
         font-weight: 600;
     }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 1.875rem;
+        }
+    }
 `;
 
 export default Elements;

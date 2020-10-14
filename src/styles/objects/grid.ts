@@ -7,5 +7,9 @@ export const Container = styled.div`
 
     display: flex;
     place-content: center;
+
+    @media (max-width: 1300px) {
+      width: 80%;
+    }
   }
 `;

@@ -19,6 +19,13 @@ export const NaverDetailBlock = styled.section`
       z-index: 900;
 
       animation: fade-in 0.3s forwards;
+
+      @media (max-width: 960px) {
+        grid-template-columns: 1fr;
+        width: 80%;
+        height: auto;
+        left: 10%;
+      }
     }
   }
 `;
@@ -26,6 +33,10 @@ export const NaverDetailBlock = styled.section`
 export const NaverImage = styled.img`
   & {
     height: 503px;
+
+    @media (max-width: 960px) {
+      height: auto;
+    }
   }
 `;
 
@@ -87,6 +98,15 @@ export const CloseButton = styled(Button)`
       top: -12px;
       width: 24px;
       height: 24px;
+    }
+
+    @media (max-width: 600px) {
+      top: 1%;
+      left: 91%;
+    }
+
+    @media (min-width: 600.1px) and (max-width: 959.9px) {
+      top: 1%;
     }
   }
 `;

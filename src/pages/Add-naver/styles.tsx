@@ -16,11 +16,14 @@ export const AddNaverContainer = styled(Container)`
   & {
     display: flex;
     flex-direction: column;
-    width: 60%;
     margin-top: var(--gap-md);
 
     button {
       align-self: flex-end;
+    }
+
+    @media (min-width: 960px) {
+      width: 60%;
     }
   }
 `;
@@ -34,6 +37,11 @@ export const AddNaverForm = styled.form`
 
     input {
       margin-bottom: var(--gap-md);
+    }
+
+    @media (max-width: 960px) {
+      grid-template-columns: 1fr;
+      grid-column-start: 1;
     }
   }
 `;

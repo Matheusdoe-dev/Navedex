@@ -11,6 +11,10 @@ export const HomeBody = styled.div`
     &.modal {
       background: var(--gray-900);
       filter: brightness(50%);
+
+      @media (max-width: 600px) {
+        min-height: 150vh;
+      }
     }
   }
 `;
@@ -36,6 +40,14 @@ export const Navers = styled.section`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: var(--gap-md);
     row-gap: var(--gap-md);
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 600.1px) and (max-width: 959.9px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `;
 
@@ -80,6 +92,7 @@ export const NoNavers = styled.div`
 
     h2 {
       margin-top: var(--gap-xl);
+      text-align: center;
     }
   }
 `;
