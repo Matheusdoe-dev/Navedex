@@ -10,19 +10,27 @@ import {
   Navers,
   HomeBody,
   ModalButtonsBlock,
+  NoNavers,
 } from "./styles";
 import { Button } from "../../styles/objects/button";
 // imgs
-import naverImg from "../../assets/naver_4.jpg";
 import Modal from "../../components/Modal";
-import naverDetailImg from "../../assets/naver_detail.jpg";
 // hooks
 import { ModalContextConsumer } from "../../hooks/modal";
 // utils
 import useCheckLogin from "../../hooks/check-login";
+import useGetNavers from "../../hooks/index-navers";
+import useShowNaver from "../../hooks/show-naver";
+import useDeleteNaver from "../../hooks/delete-naver";
 
 const Home = () => {
   useCheckLogin();
+
+  const { navers } = useGetNavers();
+
+  const { naver } = useShowNaver();
+
+  const { handleDeleteNaver } = useDeleteNaver();
 
   return (
     <ModalContextConsumer>
@@ -40,28 +48,23 @@ const Home = () => {
                       Adicionar Naver
                     </Button>
                   </HomeHeader>
-                  <Navers>
-                    <Naver
-                      name="Juliano Reis"
-                      role="Front-end Developer"
-                      image={naverImg}
-                    />
-                    <Naver
-                      name="Juliano Reis"
-                      role="Front-end Developer"
-                      image={naverImg}
-                    />
-                    <Naver
-                      name="Juliano Reis"
-                      role="Front-end Developer"
-                      image={naverImg}
-                    />
-                    <Naver
-                      name="Juliano Reis"
-                      role="Front-end Developer"
-                      image={naverImg}
-                    />
-                  </Navers>
+                  {navers.length > 0 ? (
+                    <Navers>
+                      {navers.map((naver) => (
+                        <Naver
+                          key={naver.id}
+                          name={naver.name}
+                          role={naver.job_role}
+                          image={naver.url}
+                          id={naver.id}
+                        />
+                      ))}
+                    </Navers>
+                  ) : (
+                    <NoNavers>
+                      <h2>Nenhum naver foi encontrado.</h2>
+                    </NoNavers>
+                  )}
                 </HomeContainer>
               </main>
             </HomeBody>
@@ -84,11 +87,7 @@ const Home = () => {
                 >
                   Cancelar
                 </Button>
-                <Button
-                  as="button"
-                  width="11rem"
-                  onClick={() => modalContext.handleActive("deleted")}
-                >
+                <Button as="button" width="11rem" onClick={handleDeleteNaver}>
                   Excluir
                 </Button>
               </ModalButtonsBlock>
@@ -102,14 +101,16 @@ const Home = () => {
             />
 
             {/* naver detail modal */}
-            <ModalNaverDetail
-              naverName="Juliano Reis"
-              role="Front-end Developer"
-              age="27"
-              companyTime="3 anos"
-              projects={5}
-              image={naverDetailImg}
-            />
+            {naver && (
+              <ModalNaverDetail
+                name={naver.name}
+                role={naver.job_role}
+                age={naver.age}
+                companyTime={naver.companyTime}
+                projects={naver.projects}
+                image={naver.image}
+              />
+            )}
           </>
         )
       }
