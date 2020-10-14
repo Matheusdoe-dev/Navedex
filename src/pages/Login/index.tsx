@@ -70,7 +70,7 @@ const Login = () => {
 
             <Modal
               title="Acesso negado"
-              content="È necessário estar logado para acessar a aplicação"
+              content="É necessário estar logado para acessar a aplicação"
               modal="error-access-denied"
             />
           </>
