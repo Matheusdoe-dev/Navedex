@@ -23,6 +23,12 @@ export const NaverDetailBlock = styled.section`
   }
 `;
 
+export const NaverImage = styled.img`
+  & {
+    height: 503px;
+  }
+`;
+
 export const InfoBlock = styled.article`
   & {
     padding: var(--gap-md) var(--gap-md) 0 var(--gap-md);
