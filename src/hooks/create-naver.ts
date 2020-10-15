@@ -1,11 +1,13 @@
+// hooks
 import { useState, FormEvent, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // apis
 import navedexApi from "../services/navedexApi";
-// hooks
+// contexts
 import { ModalContext } from "../hooks/modal";
 
 const useCreateNaver = () => {
+  // naver data
   const [name, setName] = useState("");
   const [job_role, setRole] = useState("");
   const [birthdate, setBirthDate] = useState("");
@@ -13,16 +15,19 @@ const useCreateNaver = () => {
   const [project, setProject] = useState("");
   const [url, setUrl] = useState("");
 
+  // naver creating status
   const [creatingStatus, setCreatingStatus] = useState("inactive");
 
+  // using modal context
   const modalContext = useContext(ModalContext);
 
   const history = useHistory();
 
   const handleCreateNaverSubmit = async (e: FormEvent) => {
+    // prevent form standard refresh on submit
     e.preventDefault();
-    setCreatingStatus("creating");
 
+    // creating naver in navedex api
     await navedexApi
       .post(
         "navers",
@@ -50,6 +55,7 @@ const useCreateNaver = () => {
   };
 
   useEffect(() => {
+    // if naver was been created, then
     if (creatingStatus === "created") {
       modalContext?.handleActive("naver-created");
       setTimeout(() => {

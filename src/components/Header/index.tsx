@@ -10,9 +10,12 @@ import { HeaderContainer } from "./styles";
 const Header = () => {
   const history = useHistory();
 
+  // handle user logout function
   const handleLogout = () => {
+    // clean the localStorage
     localStorage.clear();
 
+    // redirecting user to login page
     if (!localStorage.getItem("token")) {
       history.push("/");
     }

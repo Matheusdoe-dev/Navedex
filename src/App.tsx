@@ -15,8 +15,10 @@ import {
 } from "./hooks/modal";
 
 const App = () => {
+  // custom hooks
   const { handleActive, handleInactive } = useModal();
 
+  // modal context object
   const useModalContext: ModalContextInterface = {
     handleActive,
     handleInactive,

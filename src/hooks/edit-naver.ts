@@ -1,11 +1,13 @@
+// hooks
 import { useState, FormEvent, useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 // apis
 import navedexApi from "../services/navedexApi";
-// hooks
+// contexts
 import { ModalContext } from "./modal";
 
 const useEditNaver = () => {
+  // naver data
   const [name, setName] = useState("");
   const [job_role, setRole] = useState("");
   const [birthdate, setBirthDate] = useState("");
@@ -15,16 +17,19 @@ const useEditNaver = () => {
 
   const [editingStatus, setEditingStatus] = useState("inactive");
 
+  // using modal context
   const modalContext = useContext(ModalContext);
 
   const history = useHistory();
 
+  // get naver id from route params
   const { naver_id } = useParams();
 
+  // naver edit custom hook
   const handleEditNaverSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setEditingStatus("editing");
 
+    // editing naver on navedex api
     await navedexApi
       .put(
         `navers/${naver_id}`,
@@ -52,32 +57,36 @@ const useEditNaver = () => {
   };
 
   useEffect(() => {
+    // getting naver by id from route params
     async function getNaver() {
-      const response = await navedexApi
+      await navedexApi
         .get(`navers/${naver_id}`, {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,
           },
         })
         .then((r) => r.data)
+        .then((r) => {
+          // putting naver data on states
+          setName(r.name);
+          setRole(r.job_role);
+          setUrl(r.url);
+          setProject(r.project);
+          setBirthDate(
+            r.birthdate.split("T")[0].split("-").reverse().join("/")
+          );
+          setAdmissionDate(
+            r.admission_date.split("T")[0].split("-").reverse().join("/")
+          );
+        })
         .catch((err) => console.log(err));
-
-      if (response) {
-        setName(response.name);
-        setRole(response.job_role);
-        setUrl(response.url);
-        setProject(response.project);
-        setBirthDate(response.birthdate.split("T")[0].split("-").join("/"));
-        setAdmissionDate(
-          response.admission_date.split("T")[0].split("-").join("/")
-        );
-      }
     }
 
     getNaver();
   }, [naver_id]);
 
   useEffect(() => {
+    // if naver was been updated, then
     if (editingStatus === "updated") {
       modalContext?.handleActive("naver-updated");
       setTimeout(() => {

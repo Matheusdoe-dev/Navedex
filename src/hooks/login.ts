@@ -1,41 +1,50 @@
+// hooks
 import { useState, FormEvent, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 // apis
 import navedexApi from "../services/navedexApi";
-// hooks
+// contexts
 import { ModalContext } from "./modal";
 
-export const useLogin = () => {
+// user authentication/login custom hook
+const useLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // error states
+  // credentials error state
   const [credentialsError, setCredentialsError] = useState(false);
 
   const history = useHistory();
 
+  // using modal context
   const modalContext = useContext(ModalContext);
 
+  // handle authentication
   const handleLogin = async (e: FormEvent) => {
+    // prevent form standard refresh on submit
     e.preventDefault();
+
+    // if as a credential error active, it will be turn off on login submit
     setCredentialsError(false);
 
-    const response = await navedexApi
+    // authentication on navedex api
+    await navedexApi
       .post("users/login", {
         email,
         password,
       })
       .then((r) => r.data)
+      .then((r) => {
+        localStorage.setItem("token", `Bearer ${r.token}`);
+        history.push("/navers");
+      })
       .catch(() => {
+        // if it was catch any error, credential error state will be turn on
         setCredentialsError(true);
       });
-
-    if (response) {
-      localStorage.setItem("token", `Bearer ${response.token}`);
-      history.push("/navers");
-    }
   };
 
+  // check if login error state on localStorage is active (user tried to acess without login). if it's, then the error acess denied modal will be active and localStorage clear.
   useEffect(() => {
     if (localStorage.getItem("login-error")) {
       modalContext?.handleActive("error-access-denied");
@@ -52,3 +61,5 @@ export const useLogin = () => {
     credentialsError,
   };
 };
+
+export default useLogin;

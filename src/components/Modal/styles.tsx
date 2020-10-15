@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// components
+// styled-components
 import { Button } from "../../styles/objects/button";
 
 export const ModalBlock = styled.article`
