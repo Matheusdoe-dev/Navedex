@@ -37,6 +37,8 @@ const EditNaver = () => {
     url,
     setUrl,
     handleEditNaverSubmit,
+    admissionInputError,
+    birthdateInputError,
   } = useEditNaver();
 
   // contexts
@@ -71,6 +73,7 @@ const EditNaver = () => {
                   placeholder="Data de nascimento (dd/mm/aaaa)"
                   value={birthdate}
                   onChange={(e) => setBirthDate(e.target.value)}
+                  error={birthdateInputError ? "Formato inválido" : ""}
                   required
                 />
                 <Input
@@ -97,6 +100,7 @@ const EditNaver = () => {
                   placeholder="Data de admissão (dd/mm/aaaa)"
                   value={admission_date}
                   onChange={(e) => setAdmissionDate(e.target.value)}
+                  error={admissionInputError ? "Formato inválido" : ""}
                   required
                 />
                 <Input

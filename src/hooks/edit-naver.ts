@@ -15,12 +15,20 @@ const useEditNaver = () => {
   const [project, setProject] = useState("");
   const [url, setUrl] = useState("");
 
+  // edit status
   const [editingStatus, setEditingStatus] = useState("inactive");
+
+  // date inputs validation states
+  const [admissionInputError, setAdmissionInputError] = useState(false);
+  const [birthdateInputError, setBirthdateInputError] = useState(false);
 
   // using modal context
   const modalContext = useContext(ModalContext);
 
   const history = useHistory();
+
+  // regex - date schema
+  const datePattern = /(?:\d{2}[/]){2}\d{4}/g;
 
   // get naver id from route params
   const { naver_id } = useParams();
@@ -29,31 +37,43 @@ const useEditNaver = () => {
   const handleEditNaverSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // editing naver on navedex api
-    await navedexApi
-      .put(
-        `navers/${naver_id}`,
-        {
-          name,
-          job_role,
-          birthdate,
-          admission_date,
-          project,
-          url,
-        },
-        {
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
+    // check if the admission date input/state follow the date schema
+    if (!admission_date.match(datePattern) || admission_date.length > 10) {
+      setAdmissionInputError(true);
+    }
+
+    // check if the birthdate input/state follow the date schema
+    if (!birthdate.match(datePattern) || birthdate.length > 10) {
+      setBirthdateInputError(true);
+    }
+
+    if (birthdateInputError && admissionInputError) {
+      // editing naver on navedex api
+      await navedexApi
+        .put(
+          `navers/${naver_id}`,
+          {
+            name,
+            job_role,
+            birthdate,
+            admission_date,
+            project,
+            url,
           },
-        }
-      )
-      .then(() => {
-        setEditingStatus("updated");
-      })
-      .catch((err) => {
-        console.log(err);
-        setEditingStatus("error");
-      });
+          {
+            headers: {
+              Authorization: `${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(() => {
+          setEditingStatus("updated");
+        })
+        .catch((err) => {
+          console.log(err);
+          setEditingStatus("error");
+        });
+    }
   };
 
   useEffect(() => {
@@ -113,6 +133,8 @@ const useEditNaver = () => {
     url,
     setUrl,
     handleEditNaverSubmit,
+    admissionInputError,
+    birthdateInputError,
   };
 };
 

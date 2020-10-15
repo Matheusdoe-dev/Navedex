@@ -18,40 +18,59 @@ const useCreateNaver = () => {
   // naver creating status
   const [creatingStatus, setCreatingStatus] = useState("inactive");
 
+  // date inputs validation states
+  const [admissionInputError, setAdmissionInputError] = useState(false);
+  const [birthdateInputError, setBirthdateInputError] = useState(false);
+
   // using modal context
   const modalContext = useContext(ModalContext);
 
   const history = useHistory();
 
+  // regex - date schema
+  const datePattern = /(?:\d{2}[/]){2}\d{4}/g;
+
   const handleCreateNaverSubmit = async (e: FormEvent) => {
     // prevent form standard refresh on submit
     e.preventDefault();
 
-    // creating naver in navedex api
-    await navedexApi
-      .post(
-        "navers",
-        {
-          name,
-          job_role,
-          birthdate,
-          admission_date,
-          project,
-          url,
-        },
-        {
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
+    if (!admission_date.match(datePattern) || admission_date.length > 10) {
+      setAdmissionInputError(true);
+    }
+
+    if (!birthdate.match(datePattern) || birthdate.length > 10) {
+      setBirthdateInputError(true);
+    }
+
+    if (birthdateInputError && admissionInputError) {
+      // creating naver in navedex api
+      await navedexApi
+        .post(
+          "navers",
+          {
+            name,
+            job_role,
+            birthdate,
+            admission_date,
+            project,
+            url,
           },
-        }
-      )
-      .then(() => {
-        setCreatingStatus("created");
-      })
-      .catch((err) => {
-        console.log(err);
-        setCreatingStatus("error");
-      });
+          {
+            headers: {
+              Authorization: `${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(() => {
+          setCreatingStatus("created");
+          setAdmissionInputError(false);
+          setBirthdateInputError(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setCreatingStatus("error");
+        });
+    }
   };
 
   useEffect(() => {
@@ -82,6 +101,8 @@ const useCreateNaver = () => {
     url,
     setUrl,
     handleCreateNaverSubmit,
+    admissionInputError,
+    birthdateInputError,
   };
 };
 
