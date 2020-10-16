@@ -16,12 +16,13 @@ import {
 
 const App = () => {
   // custom hooks
-  const { handleActive, handleInactive } = useModal();
+  const { handleActive, handleInactive, position } = useModal();
 
   // modal context object
   const useModalContext: ModalContextInterface = {
     handleActive,
     handleInactive,
+    position,
   };
 
   return (

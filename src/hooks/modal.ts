@@ -5,6 +5,7 @@ import { useState, useEffect, createContext } from "react";
 export interface ModalContextInterface {
   handleActive: (modal: string) => void;
   handleInactive: () => void;
+  position: number;
 }
 
 // creating modal context
@@ -20,6 +21,8 @@ export const useModal = () => {
   const [status, setStatus] = useState(false);
   // state to control which modal is active
   const [currentModal, setCurrentModal] = useState("");
+  // state to control modal position
+  const [position, setCurrentPosition] = useState<number>(0);
 
   // to turn off all modals
   const handleInactive = () => {
@@ -32,6 +35,7 @@ export const useModal = () => {
   const handleActive = (modal: string) => {
     handleInactive();
 
+    setCurrentPosition(window.pageYOffset);
     setCurrentModal(modal);
     setStatus(true);
   };
@@ -63,5 +67,5 @@ export const useModal = () => {
     }
   }, [status, currentModal]);
 
-  return { handleActive, handleInactive };
+  return { handleActive, handleInactive, position };
 };

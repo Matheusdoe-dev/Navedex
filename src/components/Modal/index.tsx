@@ -17,7 +17,7 @@ const Modal: React.FC<ModalProps> = ({ title, content, children, modal }) => {
   const modalContext = useContext(ModalContext);
 
   return (
-    <ModalBlock data-modal={modal}>
+    <ModalBlock data-modal={modal} position={modalContext?.position}>
       <h2>{title}</h2>
       <p>{content}</p>
       <CloseButton as="button" onClick={modalContext?.handleInactive}>

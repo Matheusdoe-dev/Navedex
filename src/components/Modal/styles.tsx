@@ -2,7 +2,11 @@ import styled from "styled-components";
 // styled-components
 import { Button } from "../../styles/objects/button";
 
-export const ModalBlock = styled.article`
+interface ModalProps {
+  position?: number;
+}
+
+export const ModalBlock = styled.article<ModalProps>`
   & {
     display: none;
     opacity: 0;
@@ -13,7 +17,8 @@ export const ModalBlock = styled.article`
       position: absolute;
       width: 50%;
       left: 344px;
-      top: 244px;
+      top: ${({ position }) =>
+        position ? `calc(${position}px + 30%)` : "30%"};
       z-index: 900;
       padding: var(--gap-md);
 

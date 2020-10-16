@@ -43,7 +43,11 @@ const ModalNaverDetail: React.FC<NaverDetailProps> = ({
   const modalContext = useContext(ModalContext);
 
   return (
-    <NaverDetailBlock data-modal="naver-detail" {...props}>
+    <NaverDetailBlock
+      data-modal="naver-detail"
+      {...props}
+      position={modalContext?.position}
+    >
       <NaverImage src={image} alt={name} />
       <InfoBlock>
         <h2>{name}</h2>
