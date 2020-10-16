@@ -46,6 +46,7 @@ const useLogin = () => {
       })
       .catch(() => {
         // if it was catch any error, credential error state will be turn on
+        setAuthenticationStatus(false);
         setCredentialsError(true);
       });
   };
