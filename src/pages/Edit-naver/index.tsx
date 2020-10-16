@@ -19,6 +19,8 @@ import {
 import { Button } from "../../styles/objects/button";
 // contexts
 import { ModalContext } from "../../hooks/modal";
+// utils
+import Regexs from "../../utils/regexs";
 
 const EditNaver = () => {
   // custom hooks
@@ -37,8 +39,6 @@ const EditNaver = () => {
     url,
     setUrl,
     handleEditNaverSubmit,
-    admissionInputError,
-    birthdateInputError,
   } = useEditNaver();
 
   // contexts
@@ -72,8 +72,12 @@ const EditNaver = () => {
                   label="Data de nascimento"
                   placeholder="Data de nascimento (dd/mm/aaaa)"
                   value={birthdate}
-                  onChange={(e) => setBirthDate(e.target.value)}
-                  error={birthdateInputError ? "Formato inválido" : ""}
+                  maxLength={10}
+                  onChange={(e) =>
+                    setBirthDate(
+                      e.target.value.replace(Regexs.dateSchema, "$1/$2/$3")
+                    )
+                  }
                   required
                 />
                 <Input
@@ -99,8 +103,12 @@ const EditNaver = () => {
                   label="Data de admissão"
                   placeholder="Data de admissão (dd/mm/aaaa)"
                   value={admission_date}
-                  onChange={(e) => setAdmissionDate(e.target.value)}
-                  error={admissionInputError ? "Formato inválido" : ""}
+                  maxLength={10}
+                  onChange={(e) =>
+                    setAdmissionDate(
+                      e.target.value.replace(Regexs.dateSchema, "$1/$2/$3")
+                    )
+                  }
                   required
                 />
                 <Input

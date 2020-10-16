@@ -23,7 +23,7 @@ export const useModal = () => {
 
   // to turn off all modals
   const handleInactive = () => {
-    if (status === true) {
+    if (status) {
       setStatus(false);
     }
   };
