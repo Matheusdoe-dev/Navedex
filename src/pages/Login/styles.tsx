@@ -1,7 +1,6 @@
 import styled from "styled-components";
 // styled-components
 import { Container } from "../../styles/objects/grid";
-import { Loading } from "../../styles/objects/loading";
 
 export const LoginBody = styled.main`
   & {
