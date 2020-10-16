@@ -29,7 +29,7 @@ const Home = () => {
   // custom hooks
   useCheckLogin();
   const { navers, indexStatus } = useGetNavers();
-  const { naver } = useShowNaver();
+  const { naver, status } = useShowNaver();
   const { handleDeleteNaver } = useDeleteNaver();
 
   // contexts
@@ -119,6 +119,7 @@ const Home = () => {
             companyTime={naver.companyTime}
             projects={naver.projects}
             image={naver.image}
+            status={status}
           />
         </React.Suspense>
       )}

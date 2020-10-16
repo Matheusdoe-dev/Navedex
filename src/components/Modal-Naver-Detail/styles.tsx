@@ -115,3 +115,13 @@ export const CloseButton = styled(Button)`
     }
   }
 `;
+
+export const LoadingNaverDetail = styled.div`
+  & {
+    margin-top: calc(var(--gap-xl) * 2);
+
+    div {
+      margin: 0 auto;
+    }
+  }
+`;

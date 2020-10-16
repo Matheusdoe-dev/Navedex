@@ -16,11 +16,14 @@ const useShowNaver = () => {
   const [projects, setProjects] = useState("");
   const [image, setImage] = useState("");
 
+  const [status, setStatus] = useState("");
+
   // get naver id from route params
   const { naver_id } = useParams();
 
   // getting naver from navedex api with the id and put all data on states
   useEffect(() => {
+    setStatus("indexing");
     async function getNaver() {
       await navedexApi
         .get(`navers/${naver_id}`, {
@@ -47,6 +50,8 @@ const useShowNaver = () => {
 
           setAge(age);
           setCompanyTime(companyTime);
+
+          setStatus("indexed");
         })
         .catch((err) => console.log(err));
     }
@@ -65,7 +70,7 @@ const useShowNaver = () => {
     image,
   };
 
-  return { naver };
+  return { naver, status };
 };
 
 export default useShowNaver;
