@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 // hooks
-import useLogin from "../../hooks/login";
+import useLogin from "../../hooks/user-authentication";
 // components
 import Input from "../../components/Input";
 import Modal from "../../components/Modal";
 // imgs
 import logoImg from "../../assets/logo.svg";
 // styles
-import { LoginContainer, LoginForm, LoginBody } from "./styles";
+import { LoginContainer, LoginForm, LoginBody, LoginLoading } from "./styles";
 import { Button } from "../../styles/objects/button";
+import { Loading } from "../../styles/objects/loading";
+
 // contexts
 import { ModalContext } from "../../hooks/modal";
 
@@ -21,6 +23,7 @@ const Login = () => {
     email,
     password,
     credentialsError,
+    authenticationStatus,
   } = useLogin();
 
   // contexts
@@ -65,6 +68,13 @@ const Login = () => {
             <Button as="button" type="submit">
               Entrar
             </Button>
+            {authenticationStatus ? (
+              <LoginLoading>
+                <Loading loading />
+              </LoginLoading>
+            ) : (
+              ""
+            )}
           </LoginForm>
         </LoginContainer>
       </LoginBody>

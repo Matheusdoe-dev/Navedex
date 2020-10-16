@@ -8,11 +8,15 @@ import { ModalContext } from "./modal";
 
 // user authentication/login custom hook
 const useLogin = () => {
+  // user data
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // credentials error state
   const [credentialsError, setCredentialsError] = useState(false);
+
+  // authentication process status
+  const [authenticationStatus, setAuthenticationStatus] = useState(false);
 
   const history = useHistory();
 
@@ -23,6 +27,7 @@ const useLogin = () => {
   const handleLogin = async (e: FormEvent) => {
     // prevent form standard refresh on submit
     e.preventDefault();
+    setAuthenticationStatus(true);
 
     // if as a credential error active, it will be turn off on login submit
     setCredentialsError(false);
@@ -35,6 +40,7 @@ const useLogin = () => {
       })
       .then((r) => r.data)
       .then((r) => {
+        setAuthenticationStatus(false);
         localStorage.setItem("token", `Bearer ${r.token}`);
         history.push("/navers");
       })
@@ -59,6 +65,7 @@ const useLogin = () => {
     email,
     password,
     credentialsError,
+    authenticationStatus,
   };
 };
 
