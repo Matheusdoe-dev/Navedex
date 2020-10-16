@@ -91,12 +91,7 @@ const AddNaver = () => {
                   label="Cargo"
                   placeholder="Cargo"
                   value={job_role}
-                  maxLength={10}
-                  onChange={(e) =>
-                    setRole(
-                      e.target.value.replace(Regexs.dateSchema, "$1/$2/$3")
-                    )
-                  }
+                  onChange={(e) => setRole(e.target.value)}
                   required
                 />
                 <Input
@@ -104,6 +99,7 @@ const AddNaver = () => {
                   label="Data de admissão"
                   placeholder="Data de admissão (dd/mm/aaaa)"
                   value={admission_date}
+                  maxLength={10}
                   onChange={(e) =>
                     setAdmissionDate(
                       e.target.value.replace(Regexs.dateSchema, "$1/$2/$3")
