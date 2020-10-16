@@ -1,18 +1,17 @@
 import React, { useContext } from "react";
 // hooks
 import useLogin from "../../hooks/user-authentication";
-// components
-import Input from "../../components/Input";
-import Modal from "../../components/Modal";
 // imgs
 import logoImg from "../../assets/logo.svg";
 // styles
 import { LoginContainer, LoginForm, LoginBody, LoginLoading } from "./styles";
 import { Button } from "../../styles/objects/button";
 import { Loading } from "../../styles/objects/loading";
-
 // contexts
 import { ModalContext } from "../../hooks/modal";
+// components
+import Input from "../../components/Input";
+const Modal = React.lazy(() => import("../../components/Modal"));
 
 const Login = () => {
   // custom hooks
@@ -80,11 +79,13 @@ const Login = () => {
       </LoginBody>
 
       {/* modals */}
-      <Modal
-        title="Acesso negado"
-        content="É necessário estar logado para acessar a aplicação"
-        modal="error-access-denied"
-      />
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Acesso negado"
+          content="É necessário estar logado para acessar a aplicação"
+          modal="error-access-denied"
+        />
+      </React.Suspense>
     </>
   );
 };

@@ -2,11 +2,6 @@ import React, { useContext } from "react";
 // hooks
 import useCheckLogin from "../../hooks/check-login";
 import useEditNaver from "../../hooks/edit-naver";
-// components
-import { Link } from "react-router-dom";
-import Header from "../../components/Header";
-import Input from "../../components/Input";
-import Modal from "../../components/Modal";
 // imgs
 import arrowIcon from "../../assets/arrow-left.svg";
 // styles
@@ -17,10 +12,16 @@ import {
   EditNaverTitle,
 } from "./styles";
 import { Button } from "../../styles/objects/button";
+import { Loading } from "../../styles/objects/loading";
 // contexts
 import { ModalContext } from "../../hooks/modal";
 // utils
 import Regexs from "../../utils/regexs";
+// components
+import { Link } from "react-router-dom";
+import Header from "../../components/Header";
+import Input from "../../components/Input";
+const Modal = React.lazy(() => import("../../components/Modal"));
 
 const EditNaver = () => {
   // custom hooks
@@ -130,17 +131,21 @@ const EditNaver = () => {
       </EditNaverBody>
 
       {/* modals */}
-      <Modal
-        title="Naver atualizado"
-        content="Naver atualizado com sucesso!"
-        modal="naver-updated"
-      />
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Naver atualizado"
+          content="Naver atualizado com sucesso!"
+          modal="naver-updated"
+        />
+      </React.Suspense>
 
-      <Modal
-        title="Erro ao editar naver"
-        content="Não foi possível editar o naver, tente novamente."
-        modal="naver-edit-error"
-      />
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Erro ao editar naver"
+          content="Não foi possível editar o naver, tente novamente."
+          modal="naver-edit-error"
+        />
+      </React.Suspense>
     </>
   );
 };

@@ -2,11 +2,6 @@ import React, { useContext } from "react";
 // hooks
 import useCheckLogin from "../../hooks/check-login";
 import useCreateNaver from "../../hooks/create-naver";
-// components
-import { Link } from "react-router-dom";
-import Header from "../../components/Header";
-import Input from "../../components/Input";
-import Modal from "../../components/Modal";
 // imgs
 import arrowIcon from "../../assets/arrow-left.svg";
 // styles
@@ -17,10 +12,16 @@ import {
   AddNaverTitle,
 } from "./styles";
 import { Button } from "../../styles/objects/button";
+import { Loading } from "../../styles/objects/loading";
 // context
 import { ModalContext } from "../../hooks/modal";
 // utils
 import Regexs from "../../utils/regexs";
+// components
+import { Link } from "react-router-dom";
+import Header from "../../components/Header";
+import Input from "../../components/Input";
+const Modal = React.lazy(() => import("../../components/Modal"));
 
 const AddNaver = () => {
   // custom hooks
@@ -126,17 +127,21 @@ const AddNaver = () => {
       </AddNaverBody>
 
       {/* modals */}
-      <Modal
-        title="Naver criado"
-        content="Naver criado com sucesso!"
-        modal="naver-created"
-      />
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Naver criado"
+          content="Naver criado com sucesso!"
+          modal="naver-created"
+        />
+      </React.Suspense>
 
-      <Modal
-        title="Erro ao criar o naver"
-        content="Não foi possível criar o naver, tente novamente."
-        modal="naver-create-error"
-      />
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Erro ao criar o naver"
+          content="Não foi possível criar o naver, tente novamente."
+          modal="naver-create-error"
+        />
+      </React.Suspense>
     </>
   );
 };
