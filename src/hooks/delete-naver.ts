@@ -1,3 +1,4 @@
+// hooks
 import { useContext, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 // apis
@@ -5,32 +6,38 @@ import navedexApi from "../services/navedexApi";
 // modal
 import { ModalContext } from "./modal";
 
+// naver delete custom hook
 const useDeleteNaver = () => {
+  // naver deleting status
   const [deletingStatus, setDeletingStatus] = useState("inactive");
 
+  // get naver id from route params
   const { naver_id } = useParams();
 
+  // using modal context
   const modalContext = useContext(ModalContext);
 
   const history = useHistory();
 
+  // handle naver delete
   const handleDeleteNaver = async () => {
-    setDeletingStatus("deleting");
     await navedexApi
       .delete(`navers/${naver_id}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
       })
+      .then(() => {
+        setDeletingStatus("deleted");
+      })
       .catch((err) => {
         console.log(err);
         alert("Erro ao deletar naver.");
       });
-
-    setDeletingStatus("deleted");
   };
 
   useEffect(() => {
+    // if naver was been created, then
     if (deletingStatus === "deleted") {
       modalContext?.handleActive("deleted");
       setTimeout(() => {

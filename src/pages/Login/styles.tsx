@@ -1,9 +1,12 @@
 import styled from "styled-components";
-// components
+// styled-components
 import { Container } from "../../styles/objects/grid";
+import { Loading } from "../../styles/objects/loading";
 
 export const LoginBody = styled.main`
   & {
+    min-height: 100vh;
+
     &.modal {
       background: var(--gray-900);
       filter: brightness(50%);
@@ -43,6 +46,16 @@ export const LoginForm = styled.form`
     @media (max-width: 960px) {
       grid-column-start: 1;
       padding: calc(var(--gap) * 5) var(--gap-lg);
+    }
+  }
+`;
+
+export const LoginLoading = styled.div`
+  & {
+    margin-top: var(--gap-md);
+
+    & div {
+      width: 100%;
     }
   }
 `;

@@ -18,9 +18,11 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <InputBlock>
-      <label htmlFor={name}>
-        {label} {error ? <span>{error}</span> : ""}
-      </label>
+      {label && (
+        <label htmlFor={name}>
+          {label} {error ? <span>{error}</span> : ""}
+        </label>
+      )}
       <input
         className={error ? "error" : ""}
         type="text"

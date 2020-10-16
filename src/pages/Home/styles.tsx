@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// components
+// styled-components
 import { Container } from "../../styles/objects/grid";
 import { Button } from "../../styles/objects/button";
 
