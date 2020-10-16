@@ -74,7 +74,11 @@ const AddNaver = () => {
                   placeholder="Data de nascimento (dd/mm/aaaa)"
                   maxLength={10}
                   value={birthdate}
-                  onChange={(e) => setBirthDate(e.target.value)}
+                  onChange={(e) =>
+                    setBirthDate(
+                      e.target.value.replace(Regexs.dateSchema, "$1/$2/$3")
+                    )
+                  }
                   required
                 />
                 <Input
