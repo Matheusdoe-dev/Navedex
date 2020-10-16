@@ -4,11 +4,6 @@ import useCheckLogin from "../../hooks/check-login";
 import useGetNavers from "../../hooks/index-navers";
 import useShowNaver from "../../hooks/show-naver";
 import useDeleteNaver from "../../hooks/delete-naver";
-// components
-import Header from "../../components/Header";
-import Naver from "../../components/Naver-card";
-import ModalNaverDetail from "../../components/Modal-Naver-Detail";
-import Modal from "../../components/Modal";
 // styles
 import {
   HomeContainer,
@@ -19,13 +14,21 @@ import {
   NoNavers,
 } from "./styles";
 import { Button } from "../../styles/objects/button";
+import { Loading } from "../../styles/objects/loading";
 // contexts
 import { ModalContext } from "../../hooks/modal";
+// components
+import Header from "../../components/Header";
+const Naver = React.lazy(() => import("../../components/Naver-card"));
+const ModalNaverDetail = React.lazy(
+  () => import("../../components/Modal-Naver-Detail")
+);
+const Modal = React.lazy(() => import("../../components/Modal"));
 
 const Home = () => {
   // custom hooks
   useCheckLogin();
-  const { navers } = useGetNavers();
+  const { navers, indexStatus } = useGetNavers();
   const { naver } = useShowNaver();
   const { handleDeleteNaver } = useDeleteNaver();
 
@@ -45,65 +48,79 @@ const Home = () => {
                 Adicionar Naver
               </Button>
             </HomeHeader>
-            {navers.length > 0 ? (
+            {indexStatus === "indexing" ? <Loading loading /> : ""}
+            {navers.length > 0 && indexStatus === "indexed" ? (
               <Navers>
                 {navers.map((naver) => (
-                  <Naver
-                    key={naver.id}
-                    name={naver.name}
-                    role={naver.job_role}
-                    image={naver.url}
-                    id={naver.id}
-                  />
+                  <React.Suspense fallback={<Loading loading />}>
+                    <Naver
+                      key={naver.id}
+                      name={naver.name}
+                      role={naver.job_role}
+                      image={naver.url}
+                      id={naver.id}
+                    />
+                  </React.Suspense>
                 ))}
               </Navers>
             ) : (
+              ""
+            )}
+            {navers.length === 0 && indexStatus === "indexed" ? (
               <NoNavers>
                 <h2>Nenhum naver foi encontrado.</h2>
               </NoNavers>
+            ) : (
+              ""
             )}
           </HomeContainer>
         </main>
       </HomeBody>
 
       {/* modals */}
-      <Modal
-        title="Excluir Naver"
-        content="Tem certeza que deseja excluir este Naver?"
-        modal="delete"
-      >
-        <ModalButtonsBlock>
-          <Button
-            as="button"
-            width="11rem"
-            background="white"
-            color="var(--gray-900)"
-            border="1px solid var(--gray-900)"
-            onClick={modalContext?.handleInactive}
-          >
-            Cancelar
-          </Button>
-          <Button as="button" width="11rem" onClick={handleDeleteNaver}>
-            Excluir
-          </Button>
-        </ModalButtonsBlock>
-      </Modal>
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Excluir Naver"
+          content="Tem certeza que deseja excluir este Naver?"
+          modal="delete"
+        >
+          <ModalButtonsBlock>
+            <Button
+              as="button"
+              width="11rem"
+              background="white"
+              color="var(--gray-900)"
+              border="1px solid var(--gray-900)"
+              onClick={modalContext?.handleInactive}
+            >
+              Cancelar
+            </Button>
+            <Button as="button" width="11rem" onClick={handleDeleteNaver}>
+              Excluir
+            </Button>
+          </ModalButtonsBlock>
+        </Modal>
+      </React.Suspense>
 
-      <Modal
-        title="Naver excluído"
-        content="Naver excluído com sucesso!"
-        modal="deleted"
-      />
+      <React.Suspense fallback={<Loading loading />}>
+        <Modal
+          title="Naver excluído"
+          content="Naver excluído com sucesso!"
+          modal="deleted"
+        />
+      </React.Suspense>
 
       {naver && (
-        <ModalNaverDetail
-          name={naver.name}
-          role={naver.job_role}
-          age={naver.age}
-          companyTime={naver.companyTime}
-          projects={naver.projects}
-          image={naver.image}
-        />
+        <React.Suspense fallback={<Loading loading />}>
+          <ModalNaverDetail
+            name={naver.name}
+            role={naver.job_role}
+            age={naver.age}
+            companyTime={naver.companyTime}
+            projects={naver.projects}
+            image={naver.image}
+          />
+        </React.Suspense>
       )}
     </>
   );
