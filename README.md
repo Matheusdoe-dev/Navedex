@@ -32,9 +32,12 @@ yarn build
 
 <ul>
 <li><a href="https://reactjs.org/">React.js</a></li>
+<li><a href="https://github.com/nfl/react-helmet">React-Helmet</a></li>
+<li><a href="https://www.davidhu.io/react-spinners/">React-Spinners</a></li>
 <li><a href="https://styled-components.com/">Styled-components</a></li>
 <li><a href="https://www.typescriptlang.org/docs">TypeScript</a></li>
 <li><a href="https://github.com/axios/axios">Axios</a></li>
+
 </ul>
 
 ## Meta
