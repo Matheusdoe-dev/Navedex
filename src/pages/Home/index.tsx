@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 // hooks
-import useCheckLogin from "../../hooks/check-login";
 import useGetNavers from "../../hooks/index-navers";
 import useShowNaver from "../../hooks/show-naver";
 import useDeleteNaver from "../../hooks/delete-naver";
@@ -17,8 +16,10 @@ import { Button } from "../../styles/objects/button";
 import { Loading } from "../../styles/objects/loading";
 // contexts
 import { ModalContext } from "../../hooks/modal";
+import { AuthenticationContext } from "../../hooks/user-authentication";
 // components
 import Header from "../../components/Header";
+// lazy components
 const Naver = React.lazy(() => import("../../components/Naver-card"));
 const ModalNaverDetail = React.lazy(
   () => import("../../components/Modal-Naver-Detail")
@@ -26,14 +27,15 @@ const ModalNaverDetail = React.lazy(
 const Modal = React.lazy(() => import("../../components/Modal"));
 
 const Home = () => {
-  // custom hooks
-  useCheckLogin();
+  // contexts
+  const modalContext = useContext(ModalContext);
+  const authenticationContext = useContext(AuthenticationContext);
+
+  authenticationContext?.useCheckLogin();
+
   const { navers, indexStatus } = useGetNavers();
   const { naver, status } = useShowNaver();
   const { handleDeleteNaver } = useDeleteNaver();
-
-  // contexts
-  const modalContext = useContext(ModalContext);
 
   return (
     <>

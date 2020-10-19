@@ -8,23 +8,9 @@ import Animations from "./styles/settings/animations";
 import Reset from "./styles/generic/reset";
 import Elements from "./styles/base/elements";
 // contexts
-import {
-  ModalContextProvider,
-  useModal,
-  ModalContextInterface,
-} from "./hooks/modal";
+import { Modal } from "./hooks/modal";
 
 const App = () => {
-  // custom hooks
-  const { handleActive, handleInactive, position } = useModal();
-
-  // modal context object
-  const useModalContext: ModalContextInterface = {
-    handleActive,
-    handleInactive,
-    position,
-  };
-
   return (
     <>
       <Colors />
@@ -33,9 +19,9 @@ const App = () => {
       <Reset />
       <Elements />
 
-      <ModalContextProvider value={useModalContext}>
+      <Modal>
         <Routes />
-      </ModalContextProvider>
+      </Modal>
     </>
   );
 };
