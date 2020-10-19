@@ -31,8 +31,7 @@ const useDeleteNaver = () => {
         setDeletingStatus("deleted");
       })
       .catch((err) => {
-        console.log(err);
-        alert("Erro ao deletar naver.");
+        alert(err);
       });
   };
 

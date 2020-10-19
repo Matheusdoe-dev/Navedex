@@ -52,7 +52,7 @@ const useEditNaver = () => {
         setEditingStatus("updated");
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
         setEditingStatus("error");
       });
   };
