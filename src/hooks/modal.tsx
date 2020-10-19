@@ -1,5 +1,5 @@
 // hooks
-import { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 
 // modal context interface
 export interface ModalContextInterface {
@@ -11,12 +11,8 @@ export interface ModalContextInterface {
 // creating modal context
 export const ModalContext = createContext<ModalContextInterface | null>(null);
 
-// exporting modal context provider and consumer
-export const ModalContextProvider = ModalContext.Provider;
-export const ModalContextConsumer = ModalContext.Consumer;
-
 // use modal custom hook
-export const useModal = () => {
+export const Modal: React.FC = ({ children }) => {
   // state to control activity of modals
   const [status, setStatus] = useState(false);
   // state to control which modal is active
@@ -67,5 +63,9 @@ export const useModal = () => {
     }
   }, [status, currentModal]);
 
-  return { handleActive, handleInactive, position };
+  return (
+    <ModalContext.Provider value={{ handleActive, handleInactive, position }}>
+      {children}
+    </ModalContext.Provider>
+  );
 };
