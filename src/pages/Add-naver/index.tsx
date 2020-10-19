@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 // hooks
-import useCheckLogin from "../../hooks/check-login";
 import useCreateNaver from "../../hooks/create-naver";
 // imgs
 import arrowIcon from "../../assets/arrow-left.svg";
@@ -15,17 +14,24 @@ import { Button } from "../../styles/objects/button";
 import { Loading } from "../../styles/objects/loading";
 // context
 import { ModalContext } from "../../hooks/modal";
+import { AuthenticationContext } from "../../hooks/user-authentication";
 // utils
 import Regexs from "../../utils/regexs";
 // components
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
+// lazy components
 const Modal = React.lazy(() => import("../../components/Modal"));
 
 const AddNaver = () => {
+  // contexts
+  const modalContext = useContext(ModalContext);
+  const authenticationContext = useContext(AuthenticationContext);
+
+  authenticationContext?.useCheckLogin();
+
   // custom hooks
-  useCheckLogin();
   const {
     name,
     setName,
@@ -41,9 +47,6 @@ const AddNaver = () => {
     setUrl,
     handleCreateNaverSubmit,
   } = useCreateNaver();
-
-  // contexts
-  const modalContext = useContext(ModalContext);
 
   return (
     <>
