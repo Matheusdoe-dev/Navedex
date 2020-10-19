@@ -11,6 +11,7 @@ import { Loading } from "../../styles/objects/loading";
 import { ModalContext } from "../../hooks/modal";
 import { AuthenticationContext } from "../../hooks/user-authentication";
 // components
+import SEO from "../../components/Seo";
 import Input from "../../components/Input";
 import Modal from "../../components/Modal";
 
@@ -23,6 +24,8 @@ const Login = () => {
 
   return (
     <>
+      <SEO title="Login" description="Navedex login" />
+
       <LoginBody data-anime="modal" onClick={modalContext?.handleInactive}>
         <LoginContainer>
           <LoginForm
