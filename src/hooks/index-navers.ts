@@ -38,10 +38,12 @@ const useIndexNavers = () => {
           setNavers(r);
           setIndexStatus("indexed");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
     }
 
-    getNavers();
+    if (localStorage.getItem("token")) {
+      getNavers();
+    }
   }, []);
 
   return { navers, indexStatus };

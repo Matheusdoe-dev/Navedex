@@ -19,6 +19,7 @@ import { AuthenticationContext } from "../../hooks/user-authentication";
 import Regexs from "../../utils/regexs";
 // components
 import { Link } from "react-router-dom";
+import SEO from "../../components/Seo";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 // lazy components
@@ -50,6 +51,8 @@ const EditNaver = () => {
 
   return (
     <>
+      <SEO title="Editar naver" description="Editar naver" />
+
       <EditNaverBody data-anime="modal" onClick={modalContext?.handleInactive}>
         <Header />
 

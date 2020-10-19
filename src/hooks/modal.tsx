@@ -1,6 +1,5 @@
 // hooks
 import React, { useState, useEffect, createContext } from "react";
-
 // modal context interface
 export interface ModalContextInterface {
   handleActive: (modal: string) => void;

@@ -49,7 +49,7 @@ const useCreateNaver = () => {
         setCreatingStatus("created");
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
         setCreatingStatus("error");
       });
   };

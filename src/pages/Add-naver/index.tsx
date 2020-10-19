@@ -18,6 +18,7 @@ import { AuthenticationContext } from "../../hooks/user-authentication";
 // utils
 import Regexs from "../../utils/regexs";
 // components
+import SEO from "../../components/Seo";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
@@ -50,6 +51,8 @@ const AddNaver = () => {
 
   return (
     <>
+      <SEO title="Adicionar naver" description="Adicionar novo naver" />
+
       <AddNaverBody data-anime="modal" onClick={modalContext?.handleInactive}>
         <Header />
 

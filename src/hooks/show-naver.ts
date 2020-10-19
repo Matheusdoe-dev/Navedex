@@ -53,7 +53,7 @@ const useShowNaver = () => {
 
           setStatus("indexed");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
     }
 
     if (naver_id) {

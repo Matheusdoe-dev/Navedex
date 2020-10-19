@@ -18,6 +18,7 @@ import { Loading } from "../../styles/objects/loading";
 import { ModalContext } from "../../hooks/modal";
 import { AuthenticationContext } from "../../hooks/user-authentication";
 // components
+import SEO from "../../components/Seo";
 import Header from "../../components/Header";
 // lazy components
 const Naver = React.lazy(() => import("../../components/Naver-card"));
@@ -39,6 +40,11 @@ const Home = () => {
 
   return (
     <>
+      <SEO
+        title="Pagina Inicial"
+        description="Pagina inicial, com a lista de navers."
+      />
+
       <HomeBody data-anime="modal" onClick={modalContext?.handleInactive}>
         <Header />
 
