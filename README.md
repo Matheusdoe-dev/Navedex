@@ -10,6 +10,20 @@
 
 ## Get Started
 
+Clone:
+
+```sh
+git clone https://github.com/Matheusdoe-dev/Navedex.git
+```
+
+Install dependencies:
+
+```sh
+npm install
+
+yarn install
+```
+
 Development:
 
 ```sh
